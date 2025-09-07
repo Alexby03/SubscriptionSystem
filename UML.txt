@@ -1,0 +1,101 @@
+@startuml
+
+class Customer {
+  +id: UUID
+  +name: String
+  +email: String
+  +billingAddress: String
+  --
+  +addPaymentMethod(pm: PaymentMethod)
+  +subscribe(plan: Plan)
+  +cancelSubscription(subId: UUID)
+}
+
+class Subscription {
+  +id: UUID
+  +status: SubscriptionStatus
+  +startDate: Date
+  +endDate: Date
+  +trialEnd: Date
+  --
+  +renew()
+  +cancel()
+  +upgrade(plan: Plan)
+  +downgrade(plan: Plan)
+}
+
+enum SubscriptionStatus {
+  TRIAL
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  EXPIRED
+}
+
+class Plan {
+  +id: UUID
+  +name: String
+  +price: Decimal
+  +billingCycle: BillingCycle
+  +features: List<String>
+}
+
+enum BillingCycle {
+  MONTHLY
+  YEARLY
+  CUSTOM
+}
+
+class Invoice {
+  +id: UUID
+  +date: Date
+  +amount: Decimal
+  +status: InvoiceStatus
+  --
+  +generate()
+  +markPaid()
+}
+
+enum InvoiceStatus {
+  PENDING
+  PAID
+  FAILED
+  VOID
+}
+
+class Payment {
+  +id: UUID
+  +amount: Decimal
+  +date: Date
+  +status: PaymentStatus
+  --
+  +process()
+  +refund()
+}
+
+enum PaymentStatus {
+  SUCCESS
+  FAILED
+  PENDING
+  REFUNDED
+}
+
+class PaymentMethod {
+  +id: UUID
+  +type: String
+  +last4: String
+  +expiry: Date
+  --
+  +validate()
+}
+
+' Relationships
+Customer "1" --> "0..*" Subscription
+Customer "1" --> "0..*" Invoice
+Customer "1" --> "0..*" PaymentMethod
+Subscription "1" --> "1" Plan
+Subscription "1" --> "0..*" Invoice
+Invoice "1" --> "0..1" Payment
+Payment "1" --> "1" PaymentMethod
+
+@enduml
