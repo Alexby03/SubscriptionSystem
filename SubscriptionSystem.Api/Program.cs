@@ -1,41 +1,29 @@
+using SubscriptionSystem.Api;
+using SubscriptionSystem.Models;
+
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
 var app = builder.Build();
+var customers = new List<Customer>();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+// Map a GET endpoint at "/" that prints to the console
+app.MapGet("/", () =>
 {
-    app.MapOpenApi();
-}
 
-app.UseHttpsRedirection();
+    Console.WriteLine("Hello, World!");
+    return new Customer("Anna", "annawebster@example.com", "71 Pumpkin Hill Dr.Staten Island, NY 10314");
 
-var summaries = new[]
+});
+
+app.MapGet("/getCustomers", () => customers);
+
+app.MapPost("/customers", (CreateCustomerDto dto) =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+    
+    var customer = new Customer(dto.Name, dto.Email, dto.BillingAddress);
+    customers.Add(customer);
+    Console.WriteLine($"New customer created: {customer.Name}");
+    return Results.Created($"/customers/{customer.GuId}", customer);
+});
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
