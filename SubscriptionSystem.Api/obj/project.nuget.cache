@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "oxFCVmn3l9Q=",
+  "success": true,
+  "projectFilePath": "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Api\\SubscriptionSystem.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\BOTALEX\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
+    "C:\\Users\\BOTALEX\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}

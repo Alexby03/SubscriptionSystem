@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.csproj",
-      "projectName": "SubscriptionSystem",
-      "projectPath": "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.csproj",
+      "projectUniqueName": "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\SubscriptionSystem.Models.csproj",
+      "projectName": "SubscriptionSystem.Models",
+      "projectPath": "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\SubscriptionSystem.Models.csproj",
       "packagesPath": "C:\\Users\\BOTALEX\\.nuget\\packages\\",
-      "outputPath": "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\obj\\",
+      "outputPath": "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\BOTALEX\\AppData\\Roaming\\NuGet\\NuGet.Config"

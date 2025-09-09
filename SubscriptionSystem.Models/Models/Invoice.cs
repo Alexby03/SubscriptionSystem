@@ -1,3 +1,5 @@
+using SubscriptionSystem.Enums;
+
 namespace SubscriptionSystem.Models;
 
 public class Invoice
@@ -11,7 +13,7 @@ public class Invoice
     {
         Date = date;
         Amount = amount;
-        Status = InvoiceStatus.Unpaid;
+        Status = InvoiceStatus.Pending;
     }
 
     public InvoiceStatus MarkPaid()
