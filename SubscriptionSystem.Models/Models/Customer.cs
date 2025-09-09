@@ -25,10 +25,28 @@ public class Customer
         BillingAddress = billingAddress;
     }
 
+    public GenericResult Update(string name, string email, string billingAddress)
+    {
+        Name = name;
+        Email = email;
+        BillingAddress = billingAddress;
+        return GenericResult.Success;
+    }
+
     public AddPaymentMethodResult AddPaymentMethod(PaymentMethod paymentMethod)
     {
         _paymentMethods.Add(paymentMethod);
-        return AddPaymentMethodResult.Success; //TODO
+        return AddPaymentMethodResult.Success;
+    }
+
+    public GenericResult RemovePaymentMethod(Guid paymentMethodId)
+    {
+        var paymentMethod = _paymentMethods.FirstOrDefault(pm => pm.GuId == paymentMethodId);
+        if (paymentMethod == null)
+            return GenericResult.Failed;
+
+        _paymentMethods.Remove(paymentMethod);
+        return GenericResult.Success;
     }
 
     public SubscribeResult Subscribe(Plan plan)

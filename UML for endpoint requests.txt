@@ -1,0 +1,55 @@
+📌 Customer Endpoints
+
+Customers are central, so we need CRUD + payment methods + subscription management.
+
+X GET /customers → list all customers
+
+X GET /customers/{email} → get details of one customer
+
+X POST /customers → create a new customer
+
+X PUT /customers/{id} → update customer info (email, billing address, etc.)
+
+X DELETE /customers/{id} → delete customer
+
+X POST /customers/{id}/paymentMethods → add a payment method
+
+X DELETE /customers/{id}/paymentMethods/{pmId} → remove a payment method
+
+📌 Subscription Endpoints
+
+Customers subscribe to plans.
+
+GET /customers/{id}/subscriptions → list a customer’s subscriptions
+
+POST /customers/{id}/subscriptions → create/subscribe to a plan
+
+PUT /customers/{id}/subscriptions/{subId}/upgrade → upgrade plan
+
+PUT /customers/{id}/subscriptions/{subId}/cancel → cancel subscription
+
+📌 Plan Endpoints
+
+Plans are usually read-only for the frontend.
+
+GET /plans → list all available plans
+
+GET /plans/{id} → get one plan (name, features, price)
+
+📌 Invoice Endpoints
+
+For billing history & customer transparency.
+
+GET /customers/{id}/invoices → list invoices for a customer
+
+GET /invoices/{id} → get one invoice
+
+(optional) POST /invoices/{id}/pay → attempt payment
+
+📌 Payment Endpoints
+
+Payments are usually tied to invoices.
+
+GET /payments/{id} → payment details
+
+POST /payments/{id}/refund → refund payment
