@@ -58,7 +58,7 @@ public static class CustomerEndpoints
             if (customer == null)
                 return Results.NotFound($"Customer with id {id} was not found.");
 
-            var newPaymentMethod = new PaymentMethod(dto.Type, dto.LastFourDigits, dto.Expiry);
+            var newPaymentMethod = new PaymentMethod(dto.Type, dto.LastFourDigits, dto.Expiry, dto.GatewayToken, id);
             AddPaymentMethodResult addResult = customer.AddPaymentMethod(newPaymentMethod);
 
             return addResult == AddPaymentMethodResult.Success
@@ -73,7 +73,7 @@ public static class CustomerEndpoints
             if (customer == null)
                 return Results.NotFound($"Customer with id {customerId} was not found.");
 
-            var paymentMethod = customer.PaymentMethods.FirstOrDefault(pm => pm.GuId == paymentMethodId);
+            var paymentMethod = customer.PaymentMethods.FirstOrDefault(pm => pm.PaymentMethodId == paymentMethodId);
             if (paymentMethod == null)
                 return Results.NotFound($"Payment method with id {paymentMethodId} was not found for customer {customerId}.");
 

@@ -1,3 +1,3 @@
 namespace SubscriptionSystem.Dtos;
 
-public record AddPaymentMethodDto(string Type, string LastFourDigits, DateTime Expiry);
+public record AddPaymentMethodDto(string Type, string LastFourDigits, DateTime Expiry, string GatewayToken);

@@ -2,7 +2,7 @@ namespace SubscriptionSystem.Enums;
 
 public enum PaymentStatus
 {
-    Success,
+    Paid,
     Failed,
     Pending,
     Refunded

@@ -17,6 +17,10 @@ public class Customer
     }
 
     private readonly List<Subscription> _subscriptions = new();
+    public IReadOnlyList<Subscription> Subscriptions
+    {
+        get { return _subscriptions.AsReadOnly(); }
+    }
 
     public Customer(string name, string email, string billingAddress)
     {
@@ -41,7 +45,7 @@ public class Customer
 
     public GenericResult RemovePaymentMethod(Guid paymentMethodId)
     {
-        var paymentMethod = _paymentMethods.FirstOrDefault(pm => pm.GuId == paymentMethodId);
+        var paymentMethod = _paymentMethods.FirstOrDefault(pm => pm.PaymentMethodId == paymentMethodId);
         if (paymentMethod == null)
             return GenericResult.Failed;
 
