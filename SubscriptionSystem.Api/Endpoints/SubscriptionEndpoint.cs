@@ -23,7 +23,7 @@ public static class SubscriptionEndpoint
             if (customer == null)
                 return Results.NotFound($"Customer with id {id} was not found.");
             var plan = Plans.All[dto.PlanId];
-            var newSubscription = new Subscription(dto.PlanId, id, dto.EndDate);
+            var newSubscription = new Subscription(dto.PlanId, id, DateTime.UtcNow.AddDays(30));
             subscriptions.Add(newSubscription);
             return Results.Created($"Subscription with id {newSubscription.SubscriptionId} created for customer {id}.", newSubscription);
         });
