@@ -3,7 +3,7 @@ namespace SubscriptionSystem.Models;
 using SubscriptionSystem.Enums;
 public class Plan
 {
-    public Guid UuId { get; private set; } = Guid.NewGuid();
+    public int PlanId { get; private set; }
     public string Name { get; private set; }
     public decimal Price { get; private set; }
     public BillingCycle BillingCycle { get; private set; }
@@ -14,8 +14,9 @@ public class Plan
         get { return _features.AsReadOnly(); }
     }
 
-    public Plan(string name, decimal price, BillingCycle billingCycle, IEnumerable<string> features)
+    public Plan(int planId, string name, decimal price, BillingCycle billingCycle, IEnumerable<string> features)
     {
+        PlanId = planId;
         Name = name;
         Price = price;
         BillingCycle = billingCycle;

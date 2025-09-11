@@ -3,7 +3,7 @@ using SubscriptionSystem.Dtos;
 using SubscriptionSystem.Results;
 public static class LegacyEndpoints
 {
-    public static void MapLegacyEndpoints(this WebApplication app, List<Customer> customers)
+    public static void MapCustomerEndpoints(this WebApplication app, List<Customer> customers)
     {
         //adds a payment method to a customer
         app.MapPost("/customers/{id}/paymentMethods", (Guid id, AddPaymentMethodDto dto) =>

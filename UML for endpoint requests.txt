@@ -12,7 +12,7 @@ X DELETE /customers/{id} → delete customer
 
 Subscription Endpoints
 
-GET /customers/{id}/subscriptions → list subscriptions for a customer
+X GET /customers/{id}/subscriptions → list subscriptions for a customer
 
 POST /customers/{id}/subscriptions → create a subscription (assign to plan)
 

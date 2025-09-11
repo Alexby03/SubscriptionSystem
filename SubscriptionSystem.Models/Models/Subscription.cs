@@ -4,20 +4,18 @@ public class Subscription
 {
     public Guid SubscriptionId { get; private set; } = Guid.NewGuid();
     public Guid CustomerId { get; private set; }
-    public SubscriptionStatus Status { get; private set; }
-    public Plan Plan { get; private set; }
-    public DateTime StartDate { get; private set; }
+    public SubscriptionStatus Status { get; private set; } = SubscriptionStatus.Active;
+    public int PlanId { get; private set; }
+    public DateTime StartDate { get; private set; } = DateTime.UtcNow;
     public DateTime EndDate { get; private set; }
-    public DateTime TrialEndDate { get; private set; }
+    public DateTime? TrialEndDate { get; private set; }
 
-    public Subscription(Plan plan, DateTime startDate, DateTime endDate, DateTime trialEndDate, Guid customerId)
+    public Subscription(int planId, Guid customerId, DateTime endDate, DateTime? trialEndDate = null)
     {
-        Status = SubscriptionStatus.Active;
-        Plan = plan;
-        StartDate = startDate;
+        PlanId = planId;
         EndDate = endDate;
-        TrialEndDate = trialEndDate;
         CustomerId = customerId;
+        TrialEndDate = trialEndDate;
     }
 
     public bool Renew()

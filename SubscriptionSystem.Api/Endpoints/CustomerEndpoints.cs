@@ -7,7 +7,7 @@ public static class CustomerEndpoints
     public static void MapCustomerEndpoints(this WebApplication app, List<Customer> customers)
     {
         //lists all customers
-        app.MapGet("/customers", () => customers);
+        app.MapGet("/customers", () => Results.Ok(customers));
 
         //lists a customer by email
         app.MapGet("/customers/{email}", (string email) =>
@@ -27,13 +27,13 @@ public static class CustomerEndpoints
                 return Results.Conflict($"Customer with email {dto.Email} already exists.");
             var customer = new Customer(dto.Name, dto.Email, dto.BillingAddress);
             customers.Add(customer);
-            return Results.Created($"/customers/{customer.GuId}", customer);
+            return Results.Created($"/customers/{customer.CustomerId}", customer);
         });
 
         //replaces an existing customer info
         app.MapPut("/customers/{id}", (Guid id, CreateCustomerDto dto) =>
         {
-            var customer = customers.FirstOrDefault(c => c.GuId == id);
+            var customer = customers.FirstOrDefault(c => c.CustomerId == id);
             if (customer == null)
                 return Results.NotFound($"Customer with email {id} was not found.");
             if (customer.Update(dto.Name, dto.Email, dto.BillingAddress) == GenericResult.Success)
@@ -46,7 +46,7 @@ public static class CustomerEndpoints
         //deletes customer
         app.MapDelete("/customers/{id}", (Guid id) =>
         {
-            var customer = customers.FirstOrDefault(c => c.GuId == id);
+            var customer = customers.FirstOrDefault(c => c.CustomerId == id);
             if (customer == null)
                 return Results.NotFound($"Customer with id {id} was not found.");
             customers.Remove(customer);
