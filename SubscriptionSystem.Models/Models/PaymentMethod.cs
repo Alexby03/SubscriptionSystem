@@ -19,7 +19,7 @@ public class PaymentMethod
         CustomerId = customerId;
     }
 
-    public bool Validate(DateTime expiry)
+    public bool Validate()
     {
         return true; //TODO
     }

@@ -1,55 +1,43 @@
-📌 Customer Endpoints
-
-Customers are central, so we need CRUD + payment methods + subscription management.
+Customer Endpoints
 
 X GET /customers → list all customers
 
-X GET /customers/{email} → get details of one customer
+X GET /customers/{id} → details of one customer
 
-X POST /customers → create a new customer
+X POST /customers → create new customer
 
-X PUT /customers/{id} → update customer info (email, billing address, etc.)
+X PUT /customers/{id} → update customer info
 
 X DELETE /customers/{id} → delete customer
 
-X POST /customers/{id}/paymentMethods → add a payment method
+Subscription Endpoints
 
-X DELETE /customers/{id}/paymentMethods/{pmId} → remove a payment method
+GET /customers/{id}/subscriptions → list subscriptions for a customer
 
-📌 Subscription Endpoints
-
-Customers subscribe to plans.
-
-GET /customers/{id}/subscriptions → list a customer’s subscriptions
-
-POST /customers/{id}/subscriptions → create/subscribe to a plan
-
-PUT /customers/{id}/subscriptions/{subId}/upgrade → upgrade plan
+POST /customers/{id}/subscriptions → create a subscription (assign to plan)
 
 PUT /customers/{id}/subscriptions/{subId}/cancel → cancel subscription
 
-📌 Plan Endpoints
+PUT /customers/{id}/subscriptions/{subId}/renew → renew subscription
 
-Plans are usually read-only for the frontend.
+Plan Endpoints
 
 GET /plans → list all available plans
 
-GET /plans/{id} → get one plan (name, features, price)
+GET /plans/{id} → plan details
 
-📌 Invoice Endpoints
-
-For billing history & customer transparency.
+Invoice Endpoints
 
 GET /customers/{id}/invoices → list invoices for a customer
 
-GET /invoices/{id} → get one invoice
+GET /invoices/{id} → details of one invoice
 
-(optional) POST /invoices/{id}/pay → attempt payment
+POST /invoices/{id}/markPaid → mark an invoice as paid (manual or bank signal)
 
-📌 Payment Endpoints
+Payment Endpoints (optional but useful for logging bank transactions)
 
-Payments are usually tied to invoices.
+GET /payments/{id} → view one payment record
 
-GET /payments/{id} → payment details
+POST /payments → record a payment (e.g. a simulated “bank transaction”)
 
-POST /payments/{id}/refund → refund payment
+POST /payments/{id}/refund → refund a payment (edge case)
