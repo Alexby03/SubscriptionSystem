@@ -1,4 +1,4 @@
-Customer Endpoints
+---Customer Endpoints---
 
 X GET /customers → list all customers
 
@@ -10,31 +10,31 @@ X PUT /customers/{id} → update customer info
 
 X DELETE /customers/{id} → delete customer
 
-Subscription Endpoints
+---Subscription Endpoints---
 
 X GET /customers/{id}/subscriptions → list subscriptions for a customer
 
-POST /customers/{id}/subscriptions → create a subscription (assign to plan)
+X POST /customers/{id}/subscriptions → create a subscription (assign to plan)
 
-PUT /customers/{id}/subscriptions/{subId}/cancel → cancel subscription
+X PUT /customers/{id}/subscriptions/{subId}/cancel → cancel subscription
 
-PUT /customers/{id}/subscriptions/{subId}/renew → renew subscription
+X PUT /customers/{id}/subscriptions/{subId}/renew → renew subscription
 
-Plan Endpoints
+---Plan Endpoints---
 
-GET /plans → list all available plans
+X GET /plans → list all available plans
 
-GET /plans/{id} → plan details
+X GET /plans/{id} → plan details
 
-Invoice Endpoints
+---Invoice Endpoints---
 
-GET /customers/{id}/invoices → list invoices for a customer
+X GET /customers/{id}/invoices → list invoices for a customer
 
-GET /invoices/{id} → details of one invoice
+X GET /invoices/{id} → details of one invoice
 
-POST /invoices/{id}/markPaid → mark an invoice as paid (manual or bank signal)
+X POST /invoices/{id}/markPaid → mark an invoice as paid (manual or bank signal)
 
-Payment Endpoints (optional but useful for logging bank transactions)
+---Payment Endpoints--- (optional but useful for logging bank transactions)
 
 GET /payments/{id} → view one payment record
 
