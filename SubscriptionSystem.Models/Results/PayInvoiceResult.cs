@@ -4,5 +4,6 @@ public enum PayInvoiceResult
 {
     Success,
     Failed,
-    AlreadyPaid
+    AlreadyPaid,
+    NotFound
 }

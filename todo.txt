@@ -1,0 +1,7 @@
+✅ Overall, your endpoints are solid. 
+The main things left are business validation, 
+transaction safety, DTOs for output, 
+and plan existence checks.
+
+✅ Maybe fix a CustomerService class for 
+delete and changing credentials for a customer

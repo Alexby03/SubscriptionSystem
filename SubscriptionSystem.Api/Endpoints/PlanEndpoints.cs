@@ -1,20 +1,27 @@
 using SubscriptionSystem.Models;
+using SubscriptionSystem.Data;
+using Microsoft.EntityFrameworkCore;
 
 public static class PlanEndpoints
 {
     public static void MapPlanEndpoints(this WebApplication app)
     {
-        //list all available plans
-        app.MapGet("/plans", () => Results.Ok(Plans.All));
-
-        //plan details
-        app.MapGet("/plans/{id}", (int id) =>
+        // List all available plans
+        app.MapGet("/plans", async (AppDbContext db) =>
         {
-            if (Plans.All.TryGetValue(id, out var plan))
+            var plans = await db.Plans.ToListAsync();
+            return Results.Ok(plans);
+        });
+
+        // Get details of a single plan by id
+        app.MapGet("/plans/{id}", async (int id, AppDbContext db) =>
+        {
+            var plan = await db.Plans.FirstOrDefaultAsync(p => p.PlanId == id);
+            if (plan == null)
             {
-                return Results.Ok(plan);
+                return Results.NotFound(new { Message = $"Plan with id {id} not found." });
             }
-            return Results.NotFound(new { Message = "Plan not found." });
+            return Results.Ok(plan);
         });
     }
 }

@@ -1,4 +1,5 @@
 namespace SubscriptionSystem.Models;
+
 using SubscriptionSystem.Enums;
 using SubscriptionSystem.Results;
 
@@ -10,21 +11,20 @@ public class Subscription
     public int PlanId { get; private set; }
     public DateTime StartDate { get; private set; } = DateTime.UtcNow;
     public DateTime EndDate { get; private set; }
+    private Subscription() { }
 
     public Subscription(int planId, Guid customerId, DateTime endDate)
     {
         PlanId = planId;
-        EndDate = endDate;
         CustomerId = customerId;
-        Status = SubscriptionStatus.Active;
+        EndDate = endDate;
     }
 
     public RenewSubscriptionResult Renew()
     {
         if (Status == SubscriptionStatus.Trial)
-        {
             return RenewSubscriptionResult.Trial;
-        }
+
         EndDate = EndDate.AddDays(30);
         Status = SubscriptionStatus.Active;
         return RenewSubscriptionResult.Success;
@@ -32,13 +32,17 @@ public class Subscription
 
     public GenericResult Cancel()
     {
+        if (Status == SubscriptionStatus.Canceled)
+            return GenericResult.Failed;
+
         Status = SubscriptionStatus.Canceled;
-        return GenericResult.Success; //TODO
+        return GenericResult.Success;
     }
 
-    public bool UpgradePlan()
+    public GenericResult UpgradePlan(int newPlanId)
     {
-        return true; //TODO
+        PlanId = newPlanId;
+        EndDate = DateTime.UtcNow.AddDays(30);
+        return GenericResult.Success;
     }
-
 }

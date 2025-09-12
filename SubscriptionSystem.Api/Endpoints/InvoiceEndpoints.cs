@@ -1,33 +1,49 @@
+using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
+using SubscriptionSystem.Data;
 using SubscriptionSystem.Models;
 using SubscriptionSystem.Results;
+using SubscriptionSystem.Services;
 
 public static class InvoiceEndpoints
 {
-    public static void MapInvoiceEndpoints(this WebApplication app, List<Customer> customers, List<Invoice> invoices)
+    public static void MapInvoiceEndpoints(this WebApplication app)
     {
         //list invoices for a customer
-        app.MapGet("/customers/{id}/invoices", (Guid id) =>
+        app.MapGet("/customers/{id}/invoices", async (Guid id, InvoiceService service, AppDbContext db) =>
         {
-            var customerInvoices = invoices.Where(i => i.CustomerId == id).ToList();
+            var customerInvoices = await service.GetInvoicesForCustomerAsync(id);
+            if (customerInvoices.Count == 0)
+                return Results.NotFound($"No invoices found for customer with id {id}.");
+            return Results.Ok(customerInvoices);
         });
 
         //details of one invoice
-        app.MapGet("/invoices/{id}", (Guid id) =>
+        app.MapGet("/invoices/{id}", async (Guid id, InvoiceService service, AppDbContext db) =>
         {
-            var invoice = invoices.FirstOrDefault(i => i.InvoiceId == id);
-            return invoice is not null ? Results.Ok(invoice) : Results.NotFound();
+            var invoice = await service.GetInvoiceByIdAsync(id);
+            if (invoice == null)
+                return Results.NotFound($"No invoice found for customer with id {id}.");
+            return Results.Ok(invoice);
         });
 
-        //mark an invoice as paid (manual or bank signal)
-        app.MapPost("/invoices/{id}/markPaid", (Guid id) =>
+        // mark invoice as paid
+        app.MapPost("/invoices/{id}/markPaid", async (Guid id, InvoiceService service) =>
         {
-            var invoice = invoices.FirstOrDefault(i => i.InvoiceId == id);
-            if (invoice is null)
+            var result = await service.MarkPaidAsync(id);
+            return result switch
             {
-                return Results.NotFound();
-            }
-            var result = invoice.MarkPaid();
-            return result is PayInvoiceResult.Success ? Results.Ok(invoice) : Results.BadRequest();
+                PayInvoiceResult.Success => Results.Ok(),
+                PayInvoiceResult.NotFound => Results.NotFound(),
+                _ => Results.BadRequest()
+            };
+        });
+
+        // list unpaid invoices
+        app.MapGet("/customers/{id}/invoices/unpaid", async (Guid id, InvoiceService service) =>
+        {
+            var unpaidInvoices = await service.GetUnpaidInvoicesForCustomerAsync(id);
+            return Results.Ok(unpaidInvoices);
         });
     }
 }

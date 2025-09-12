@@ -1,45 +1,66 @@
 namespace SubscriptionSystem.Services;
 
+using SubscriptionSystem.Data;
 using SubscriptionSystem.Models;
+using SubscriptionSystem.Results;
+using Microsoft.EntityFrameworkCore;
 
 public class SubscriptionService
 {
-    private readonly List<Subscription> _subscriptions;
-    private readonly List<Invoice> _invoices;
+    private readonly AppDbContext _db;
 
-    public SubscriptionService(List<Subscription> subscriptions, List<Invoice> invoices)
+    public SubscriptionService(AppDbContext db)
     {
-        _subscriptions = subscriptions;
-        _invoices = invoices;
+        _db = db;
     }
 
-    public Subscription CreateSubscription(Customer customer, int planId, DateTime endDate)
+    public async Task<Subscription> CreateSubscriptionAsync(Guid customerId, int planId, DateTime endDate)
     {
-        var subscription = new Subscription(planId, customer.CustomerId, endDate);
-        _subscriptions.Add(subscription);
-        GenerateInvoice(subscription);
+        var subscription = new Subscription(planId, customerId, endDate);
+        await _db.Subscriptions.AddAsync(subscription);
+
+        var invoice = new Invoice(
+            subscription.StartDate.AddDays(30),
+            Plans.All[planId].Price,
+            customerId,
+            subscription.SubscriptionId
+        );
+        await _db.Invoices.AddAsync(invoice);
+
+        await _db.SaveChangesAsync();
+
+        Console.WriteLine($"Invoice generated for CustomerId={customerId}, Amount={invoice.Amount:C}, DueDate={invoice.DueDate}");
+
         return subscription;
     }
 
-    private void GenerateInvoice(Subscription subscription)
+    public async Task<RenewSubscriptionResult> RenewSubscriptionAsync(Guid subscriptionId)
     {
-        var invoice = new Invoice(subscription.StartDate.AddDays(30), GetPlanPrice(subscription.PlanId), subscription.CustomerId, subscription.SubscriptionId);
-        _invoices.Add(invoice);
+        var subscription = await _db.Subscriptions.FirstOrDefaultAsync(s => s.SubscriptionId == subscriptionId);
+        if (subscription == null)
+            return RenewSubscriptionResult.Failed;
+        var result = subscription.Renew();
+        await _db.SaveChangesAsync();
+        return result;
     }
 
-    private decimal GetPlanPrice(int planId)
+    public async Task<GenericResult> CancelSubscriptionAsync(Guid subscriptionId)
     {
-        return Plans.All[planId].Price;
+        var subscription = await _db.Subscriptions.FirstOrDefaultAsync(s => s.SubscriptionId == subscriptionId);
+        if (subscription == null)
+            return GenericResult.Failed;
+        var result = subscription.Cancel();
+        await _db.SaveChangesAsync();
+        return GenericResult.Success;
     }
 
-    public IEnumerable<Subscription> GetSubscriptions(Guid customerId)
+    public async Task<GenericResult> UpgradePlanAsync(Guid subscriptionId, int newPlanId)
     {
-        return _subscriptions.Where(s => s.CustomerId == customerId);
+        var subscription = await _db.Subscriptions.FirstOrDefaultAsync(s => s.SubscriptionId == subscriptionId);
+        if (subscription == null)
+            return GenericResult.Failed;
+        var result = subscription.UpgradePlan(newPlanId);
+        await _db.SaveChangesAsync();
+        return result;
     }
-
-    public IEnumerable<Invoice> GetInvoices(Guid customerId)
-    {
-        return _invoices.Where(i => i.CustomerId == customerId);
-    }
-        
 }
