@@ -1,11 +1,14 @@
 using SubscriptionSystem.Models;
 using SubscriptionSystem.Dtos;
 using SubscriptionSystem.Results;
+using SubscriptionSystem.Services;
 
 public static class SubscriptionEndpoint
 {
-    public static void MapSubscriptionEndpoints(this WebApplication app, List<Customer> customers, List<Subscription> subscriptions)
+    public static void MapSubscriptionEndpoints(this WebApplication app, List<Customer> customers, List<Subscription> subscriptions, List<Invoice> invoices)
     {
+        var subscriptionService = new SubscriptionService(subscriptions, invoices);
+
         //get all subscriptions for a customer
         app.MapGet("/customers/{id}/subscriptions", (Guid id) =>
         {
@@ -22,8 +25,8 @@ public static class SubscriptionEndpoint
             var customer = customers.FirstOrDefault(c => c.CustomerId == id);
             if (customer == null)
                 return Results.NotFound($"Customer with id {id} was not found.");
-            var plan = Plans.All[dto.PlanId];
-            var newSubscription = new Subscription(dto.PlanId, id, DateTime.UtcNow.AddDays(30));
+
+            var newSubscription = subscriptionService.CreateSubscription(customer, dto.PlanId, DateTime.UtcNow.AddDays(30));
             subscriptions.Add(newSubscription);
             return Results.Created($"Subscription with id {newSubscription.SubscriptionId} created for customer {id}.", newSubscription);
         });
