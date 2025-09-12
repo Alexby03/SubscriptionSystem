@@ -11,7 +11,7 @@ public static class Plans
                 "Trial",
                 0.00m,
                 BillingCycle.Monthly,
-                new List<string> { "Base feature 1", "Base feature 2" }
+                "Base feature 1 and Base feature 2"
             )
         },
         { 1, new Plan
@@ -20,7 +20,7 @@ public static class Plans
                 "Basic",
                 59.99m,
                 BillingCycle.Monthly,
-                new List<string> { "Base feature 1", "Base feature 2", "Basic Feature 1" }
+                "Base feature 1 and Base feature 2 and Basic Feature 1"
             )
         },
         { 2, new Plan
@@ -29,7 +29,7 @@ public static class Plans
                 "Business",
                 159.99m,
                 BillingCycle.Monthly,
-                new List<string> { "Base feature 1", "Base feature 2", "Premium Feature 1" }
+                "Base feature 1 and Base feature 2 and Premium Feature 1"
             )
         },
         { 3, new Plan
@@ -38,7 +38,7 @@ public static class Plans
                 "Enterprise",
                 299.99m,
                 BillingCycle.Monthly,
-                new List<string> { "Base feature 1", "Premium feature 1", "Enterprise Feature 1" }
+                "Base feature 1 and Premium feature 1 and Enterprise Feature 1"
             )
         }
     };

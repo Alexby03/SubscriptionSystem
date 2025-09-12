@@ -3,10 +3,10 @@ using SubscriptionSystem.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-var customers = new List<Customer>();
-var invoices = new List<Invoice>();
-var subscriptions = new List<Subscription>();
-var payments = new List<Payment>();
+//var customers = new List<Customer>();
+//var invoices = new List<Invoice>();
+//var subscriptions = new List<Subscription>();
+//var payments = new List<Payment>();
 
 //dotnet run --urls "http://0.0.0.0:5034"
 //app.MapLegacyEndpoints(customers);
@@ -28,10 +28,10 @@ using (var scope = app.Services.CreateScope())
     db.Database.EnsureCreated(); // creates tables if they don’t exist
 }
 
-app.MapCustomerEndpoints(customers);
-app.MapSubscriptionEndpoints(customers, subscriptions, invoices);
-app.MapPlanEndpoints();
-app.MapInvoiceEndpoints(customers, invoices);
+app.MapCustomerEndpoints();
+//app.MapSubscriptionEndpoints();
+//app.MapPlanEndpoints();
+//app.MapInvoiceEndpoints();
 //app.MapPaymentEndpoints(payments);
 
 app.Run();

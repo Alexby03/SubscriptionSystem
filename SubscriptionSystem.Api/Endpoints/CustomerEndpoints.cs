@@ -1,18 +1,24 @@
 using SubscriptionSystem.Models;
 using SubscriptionSystem.Dtos;
 using SubscriptionSystem.Results;
+using Microsoft.EntityFrameworkCore;
+using SubscriptionSystem.Data;
 
 public static class CustomerEndpoints
 {
-    public static void MapCustomerEndpoints(this WebApplication app, List<Customer> customers)
+    public static void MapCustomerEndpoints(this WebApplication app)
     {
         //lists all customers
-        app.MapGet("/customers", () => Results.Ok(customers));
+        app.MapGet("/customers", async (AppDbContext db) =>
+        {
+            var customers = await db.Customers.ToListAsync();
+            return Results.Ok(customers);
+        });
 
         //lists a customer by email
-        app.MapGet("/customers/{email}", (string email) =>
+        app.MapGet("/customers/{email}", async (string email, AppDbContext db) =>
         {
-            var customer = customers.FirstOrDefault(customer => customer.Email == email);
+            var customer = await db.Customers.FirstOrDefaultAsync(customer => customer.Email == email);
             if (customer == null)
                 return Results.NotFound($"Customer with email {email} was not found.");
 
@@ -20,37 +26,56 @@ public static class CustomerEndpoints
         });
 
         //creates a new customer
-        app.MapPost("/customers", (CreateCustomerDto dto) =>
+        app.MapPost("/customers", async (CreateCustomerDto dto, AppDbContext db) =>
         {
-            var dupCustomer = customers.FirstOrDefault(c => c.Email == dto.Email);
-            if (dupCustomer != null)
-                return Results.Conflict($"Customer with email {dto.Email} already exists.");
             var customer = new Customer(dto.Name, dto.Email, dto.BillingAddress);
-            customers.Add(customer);
+            try
+            {
+                db.Customers.Add(customer);
+                await db.SaveChangesAsync();
+            } catch (DbUpdateException ex) when (ex.InnerException?.Message.Contains("Duplicate entry") == true)
+            {
+                return Results.Conflict($"Customer with email {dto.Email} already exists.");
+            }
             return Results.Created($"/customers/{customer.CustomerId}", customer);
         });
 
         //replaces an existing customer info
-        app.MapPut("/customers/{id}", (Guid id, CreateCustomerDto dto) =>
+        app.MapPut("/customers/{id}", async (Guid id, CreateCustomerDto dto, AppDbContext db) =>
         {
-            var customer = customers.FirstOrDefault(c => c.CustomerId == id);
+            var customer = await db.Customers.FirstOrDefaultAsync(c => c.CustomerId == id);
             if (customer == null)
-                return Results.NotFound($"Customer with email {id} was not found.");
-            if (customer.Update(dto.Name, dto.Email, dto.BillingAddress) == GenericResult.Success)
+                return Results.NotFound($"Customer with id {id} not found.");
+
+            customer.Update(dto.Name, dto.Email, dto.BillingAddress);
+            try
             {
-                return Results.Ok(customer);
+                await db.SaveChangesAsync();
             }
-            return Results.BadRequest("Failed to update customer.");
+            catch (DbUpdateException ex)
+            {
+                return Results.Conflict($"Could not update customer with id {id}. {ex.Message}");
+            }
+            return Results.Ok(customer);
         });
 
-        //deletes customer
-        app.MapDelete("/customers/{id}", (Guid id) =>
+        // Deletes a customer
+        app.MapDelete("/customers/{id}", async (Guid id, AppDbContext db) =>
         {
-            var customer = customers.FirstOrDefault(c => c.CustomerId == id);
+            var customer = await db.Customers.FirstOrDefaultAsync(c => c.CustomerId == id);
             if (customer == null)
                 return Results.NotFound($"Customer with id {id} was not found.");
-            customers.Remove(customer);
+            try
+            {
+                db.Customers.Remove(customer);
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                return Results.BadRequest($"Could not delete customer with id {id}. {ex.Message}");
+            }
             return Results.NoContent();
         });
+
     }
 }
