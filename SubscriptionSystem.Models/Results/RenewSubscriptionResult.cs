@@ -4,5 +4,6 @@ public enum RenewSubscriptionResult
 {
     Success,
     Trial,
-    Failed
+    Failed,
+    Canceled
 }

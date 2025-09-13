@@ -18,33 +18,42 @@ public class AppDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Unique email constraint
+        //ENTITY RELATIONS:
+
+        //CUSTOMER
+        //unique email constraint
         modelBuilder.Entity<Customer>()
             .HasIndex(c => c.Email)
             .IsUnique();
 
-        // Subscriptions
+        //SUBSCRIPTION
         modelBuilder.Entity<Subscription>()
-            .HasOne<Customer>()            // Subscription has one Customer
-            .WithMany()                    // Customer has many subscriptions (no nav property)
+            .HasOne<Customer>()
+            .WithMany()
             .HasForeignKey(s => s.CustomerId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Invoices
+        //INVOICE
         modelBuilder.Entity<Invoice>()
             .HasOne<Customer>()
             .WithMany()
             .HasForeignKey(i => i.CustomerId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Payments
+        modelBuilder.Entity<Invoice>()
+            .HasOne<Subscription>()
+            .WithMany()
+            .HasForeignKey(i => i.SubscriptionId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+
+        //PAYMENT
         modelBuilder.Entity<Payment>()
             .HasOne<Customer>()
             .WithMany()
             .HasForeignKey(p => p.CustomerId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Payments → Invoice
         modelBuilder.Entity<Payment>()
             .HasOne<Invoice>()
             .WithMany()

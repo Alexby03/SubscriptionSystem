@@ -4,6 +4,7 @@ using SubscriptionSystem.Results;
 using SubscriptionSystem.Services;
 using Microsoft.EntityFrameworkCore;
 using SubscriptionSystem.Data;
+using Microsoft.AspNetCore.Mvc;
 
 public static class SubscriptionEndpoint
 {
@@ -20,7 +21,7 @@ public static class SubscriptionEndpoint
         });
 
         //create a subscription for a customer
-        app.MapPost("/customers/{id}/subscriptions", async (Guid id, CreateSubscriptionDto dto, AppDbContext db, SubscriptionService service) =>
+        app.MapPost("/customers/{id}/subscriptions", async (Guid id, CreateSubscriptionDto dto, AppDbContext db, [FromServices] SubscriptionService service) =>
         {
             var customer = await db.Customers.FirstOrDefaultAsync(c => c.CustomerId == id);
             if (customer == null)
@@ -34,7 +35,7 @@ public static class SubscriptionEndpoint
         });
 
         //cancel a subscription for a customer
-        app.MapPut("/customers/{customerId}/subscriptions/{subscriptionId}/cancel", async (Guid customerId, Guid subscriptionId, AppDbContext db, SubscriptionService service) =>
+        app.MapPut("/customers/{customerId}/subscriptions/{subscriptionId}/cancel", async (Guid customerId, Guid subscriptionId, AppDbContext db, [FromServices] SubscriptionService service) =>
         {
             var subscription = await db.Subscriptions.FirstOrDefaultAsync(s => s.SubscriptionId == subscriptionId && s.CustomerId == customerId);
             if (subscription == null)
@@ -47,16 +48,18 @@ public static class SubscriptionEndpoint
         });
 
         //renew a subscription for a customer
-        app.MapPut("/customers/{customerId}/subscriptions/{subscriptionId}/renew", async (Guid customerId, Guid subscriptionId, AppDbContext db) =>
+        app.MapPut("/customers/{customerId}/subscriptions/{subscriptionId}/renew", async (Guid customerId, Guid subscriptionId, AppDbContext db, [FromServices] SubscriptionService service) =>
         {
             var subscription = await db.Subscriptions.FirstOrDefaultAsync(s => s.SubscriptionId == subscriptionId && s.CustomerId == customerId);
             if (subscription == null)
                 return Results.NotFound($"Subscription with id {subscriptionId} for customer {customerId} was not found.");
-            var renewResult = subscription.Renew();
+            var renewResult = service.RenewSubscriptionAsync(subscriptionId).Result;
             if (renewResult == RenewSubscriptionResult.Failed)
                 return Results.BadRequest($"Subscription with id {subscriptionId} could not be renewed.");
             if (renewResult == RenewSubscriptionResult.Trial)
                 return Results.BadRequest($"Subscription with id {subscriptionId} is in trial period and cannot be renewed.");
+            if (renewResult == RenewSubscriptionResult.Canceled)
+                return Results.BadRequest($"Subscription with id {subscriptionId} is canceled and cannot be renewed.");
             await db.SaveChangesAsync();
             return Results.Ok($"Subscription with id {subscriptionId} renewed successfully until {subscription.EndDate}.");
         });

@@ -76,6 +76,5 @@ public static class CustomerEndpoints
             }
             return Results.NoContent();
         });
-
     }
 }

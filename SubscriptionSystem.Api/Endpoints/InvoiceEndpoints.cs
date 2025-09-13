@@ -1,4 +1,5 @@
 using System.Data.Common;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SubscriptionSystem.Data;
 using SubscriptionSystem.Models;
@@ -10,7 +11,7 @@ public static class InvoiceEndpoints
     public static void MapInvoiceEndpoints(this WebApplication app)
     {
         //list invoices for a customer
-        app.MapGet("/customers/{id}/invoices", async (Guid id, InvoiceService service, AppDbContext db) =>
+        app.MapGet("/customers/{id}/invoices", async (Guid id, InvoiceService service) =>
         {
             var customerInvoices = await service.GetInvoicesForCustomerAsync(id);
             if (customerInvoices.Count == 0)
@@ -19,7 +20,7 @@ public static class InvoiceEndpoints
         });
 
         //details of one invoice
-        app.MapGet("/invoices/{id}", async (Guid id, InvoiceService service, AppDbContext db) =>
+        app.MapGet("/invoices/{id}", async (Guid id, [FromServices] InvoiceService service) =>
         {
             var invoice = await service.GetInvoiceByIdAsync(id);
             if (invoice == null)
@@ -28,7 +29,7 @@ public static class InvoiceEndpoints
         });
 
         // mark invoice as paid
-        app.MapPost("/invoices/{id}/markPaid", async (Guid id, InvoiceService service) =>
+        app.MapPost("/invoices/{id}/markPaid", async (Guid id, [FromServices] InvoiceService service) =>
         {
             var result = await service.MarkPaidAsync(id);
             return result switch
@@ -40,7 +41,7 @@ public static class InvoiceEndpoints
         });
 
         // list unpaid invoices
-        app.MapGet("/customers/{id}/invoices/unpaid", async (Guid id, InvoiceService service) =>
+        app.MapGet("/customers/{id}/invoices/unpaid", async (Guid id, [FromServices] InvoiceService service) =>
         {
             var unpaidInvoices = await service.GetUnpaidInvoicesForCustomerAsync(id);
             return Results.Ok(unpaidInvoices);

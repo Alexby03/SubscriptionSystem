@@ -12,7 +12,7 @@ public class Invoice
     public DateTime DueDate { get; private set; }
     public DateTime PaidDate { get; private set; }
     public decimal Amount { get; private set; }
-    public InvoiceStatus Status { get; private set; }
+    public InvoiceStatus Status { get; set; }
 
     public Invoice(DateTime dueDate, decimal amount, Guid customerId, Guid subscriptionId)
     {

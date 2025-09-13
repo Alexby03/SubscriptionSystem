@@ -5,9 +5,10 @@ public enum ProcessPaymentResult
     Pending,
     Success,
     InvalidAmount,
-    InvalidPaymentMethod,
     NetworkError,
     Declined,
     AlreadyProcessed,
-    Refunded
+    Refunded,
+    NotFound,
+    Failed
 }

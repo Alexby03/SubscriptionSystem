@@ -14,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     )
 );
 builder.Services.AddScoped<SubscriptionService>();
+builder.Services.AddScoped<InvoiceService>();
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -26,6 +27,6 @@ app.MapCustomerEndpoints();
 app.MapSubscriptionEndpoints();
 app.MapPlanEndpoints();
 app.MapInvoiceEndpoints();
-//app.MapPaymentEndpoints(payments);
+app.MapPaymentEndpoints();
 
 app.Run();

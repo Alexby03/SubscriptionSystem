@@ -16,6 +16,7 @@ public class Subscription
     public Subscription(int planId, Guid customerId, DateTime endDate)
     {
         PlanId = planId;
+        if(planId == 0) Status = SubscriptionStatus.Trial;
         CustomerId = customerId;
         EndDate = endDate;
     }
@@ -24,7 +25,8 @@ public class Subscription
     {
         if (Status == SubscriptionStatus.Trial)
             return RenewSubscriptionResult.Trial;
-
+        if (Status == SubscriptionStatus.Canceled)
+            return RenewSubscriptionResult.Canceled;
         EndDate = EndDate.AddDays(30);
         Status = SubscriptionStatus.Active;
         return RenewSubscriptionResult.Success;
