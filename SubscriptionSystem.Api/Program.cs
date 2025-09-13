@@ -13,6 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         new MySqlServerVersion(new Version(9, 4, 0))
     )
 );
+builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<SubscriptionService>();
 builder.Services.AddScoped<InvoiceService>();
 var app = builder.Build();

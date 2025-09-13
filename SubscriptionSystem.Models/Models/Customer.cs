@@ -1,3 +1,4 @@
+using SubscriptionSystem.Enums;
 using SubscriptionSystem.Models;
 using SubscriptionSystem.Results;
 
@@ -9,6 +10,7 @@ public class Customer
     public string Name { get; private set; }
     public string Email { get; private set; }
     public string BillingAddress { get; private set; }
+    public CustomerStatus Status { get; private set; } = CustomerStatus.Active;
 
     public Customer(string name, string email, string billingAddress)
     {
@@ -29,10 +31,16 @@ public class Customer
     {
         return SubscribeResult.Success; //TODO
     }
-    
+
     public UnsubscribeResult CancelSubscription(Plan plan)
     {
         return UnsubscribeResult.Success; //TODO
+    }
+    
+    public GenericResult MarkInactive()
+    {
+        Status = CustomerStatus.Inactive;
+        return GenericResult.Success;
     }
 
 }

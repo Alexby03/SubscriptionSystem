@@ -3,22 +3,25 @@ using SubscriptionSystem.Dtos;
 using SubscriptionSystem.Results;
 using Microsoft.EntityFrameworkCore;
 using SubscriptionSystem.Data;
+using SubscriptionSystem.Services;
 
 public static class CustomerEndpoints
 {
     public static void MapCustomerEndpoints(this WebApplication app)
     {
         //lists all customers
-        app.MapGet("/customers", async (AppDbContext db) =>
+        app.MapGet("/customers", async (CustomerService service) =>
         {
-            var customers = await db.Customers.ToListAsync();
+            var customers = await service.GetAllCustomersAsync();
+            if (customers.Count == 0)
+                return Results.NotFound("No customers in database.");
             return Results.Ok(customers);
         });
 
         //lists a customer by email
-        app.MapGet("/customers/{email}", async (string email, AppDbContext db) =>
+        app.MapGet("/customers/{email}", async (string email, CustomerService service) =>
         {
-            var customer = await db.Customers.FirstOrDefaultAsync(customer => customer.Email == email);
+            var customer = await service.GetCustomerByEmailAsync(email);
             if (customer == null)
                 return Results.NotFound($"Customer with email {email} was not found.");
 
@@ -26,55 +29,30 @@ public static class CustomerEndpoints
         });
 
         //creates a new customer
-        app.MapPost("/customers", async (CreateCustomerDto dto, AppDbContext db) =>
+        app.MapPost("/customers", async (CreateCustomerDto dto, CustomerService service) =>
         {
-            var customer = new Customer(dto.Name, dto.Email, dto.BillingAddress);
-            try
-            {
-                db.Customers.Add(customer);
-                await db.SaveChangesAsync();
-            } catch (DbUpdateException ex) when (ex.InnerException?.Message.Contains("Duplicate entry") == true)
-            {
+            var result = await service.CreateCustomerAsync(dto);
+            if (result == GenericResult.Duplicate)
                 return Results.Conflict($"Customer with email {dto.Email} already exists.");
-            }
-            return Results.Created($"/customers/{customer.CustomerId}", customer);
+            return Results.Created($"Successfully created customer with email {dto.Email}.", dto);
         });
 
         //replaces an existing customer info
-        app.MapPut("/customers/{id}", async (Guid id, CreateCustomerDto dto, AppDbContext db) =>
+        app.MapPut("/customers/{id}", async (Guid id, CreateCustomerDto dto, CustomerService service) =>
         {
-            var customer = await db.Customers.FirstOrDefaultAsync(c => c.CustomerId == id);
+            var customer = await service.UpdateCustomerAsync(id, dto);
             if (customer == null)
                 return Results.NotFound($"Customer with id {id} not found.");
-
-            customer.Update(dto.Name, dto.Email, dto.BillingAddress);
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException ex)
-            {
-                return Results.Conflict($"Could not update customer with id {id}. {ex.Message}");
-            }
             return Results.Ok(customer);
         });
 
-        // Deletes a customer
-        app.MapDelete("/customers/{id}", async (Guid id, AppDbContext db) =>
+        //mark customer inactive
+        app.MapDelete("/customers/{id}", async (Guid id, CustomerService service) =>
         {
-            var customer = await db.Customers.FirstOrDefaultAsync(c => c.CustomerId == id);
+            var customer = await service.MarkCustomerInactiveAsync(id);
             if (customer == null)
-                return Results.NotFound($"Customer with id {id} was not found.");
-            try
-            {
-                db.Customers.Remove(customer);
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException ex)
-            {
-                return Results.BadRequest($"Could not delete customer with id {id}. {ex.Message}");
-            }
-            return Results.NoContent();
+                return Results.NotFound($"Customer with id {id} not found.");
+            return Results.Ok(customer);
         });
     }
 }
