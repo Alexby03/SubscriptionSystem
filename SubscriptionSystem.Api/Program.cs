@@ -1,7 +1,7 @@
-using SubscriptionSystem.Models;
 using SubscriptionSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using SubscriptionSystem.Services;
+using SubscriptionSystem.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +16,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<SubscriptionService>();
 builder.Services.AddScoped<InvoiceService>();
+builder.Services.AddScoped<PaymentService>();
+
+//registered services for event handling
+builder.Services.AddScoped<IEventDispatcher, EventDispatcher>();
+builder.Services.AddScoped<IEventHandler<CustomerCreatedEvent>, CustomerCreatedEventHandler>();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())

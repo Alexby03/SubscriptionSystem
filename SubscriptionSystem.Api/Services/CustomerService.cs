@@ -4,17 +4,18 @@ using SubscriptionSystem.Data;
 using SubscriptionSystem.Models;
 using SubscriptionSystem.Results;
 using Microsoft.EntityFrameworkCore;
-using SubscriptionSystem.Enums;
-using Microsoft.VisualBasic;
 using SubscriptionSystem.Dtos;
+using SubscriptionSystem.Events;
 
 public class CustomerService
 {
     private readonly AppDbContext _db;
+    private readonly IEventDispatcher _dispatcher;
 
-    public CustomerService(AppDbContext db)
+    public CustomerService(AppDbContext db, IEventDispatcher dispatcher)
     {
         _db = db;
+        _dispatcher = dispatcher;
     }
 
     public async Task<List<Customer>> GetAllCustomersAsync()
@@ -34,6 +35,9 @@ public class CustomerService
         {
             _db.Customers.Add(customer);
             await _db.SaveChangesAsync();
+
+            var @event = new CustomerCreatedEvent(customer.CustomerId, customer.Name, customer.Email);
+            await _dispatcher.PublishAsync(@event);
         }
         catch (DbUpdateException ex) when (ex.InnerException?.Message.Contains("Duplicate entry") == true)
         {
