@@ -1,8 +1,7 @@
 using SubscriptionSystem.Enums;
-using SubscriptionSystem.Models;
 using SubscriptionSystem.Results;
 
-namespace SubscriptionSystem.Models;
+namespace SubscriptionSystem.Entities;
 
 public class Customer
 {

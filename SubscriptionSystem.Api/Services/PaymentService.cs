@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SubscriptionSystem.Data;
 using SubscriptionSystem.Enums;
-using SubscriptionSystem.Models;
+using SubscriptionSystem.Entities;
 using SubscriptionSystem.Results;
 
 namespace SubscriptionSystem.Services;

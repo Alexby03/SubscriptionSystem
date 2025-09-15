@@ -14,10 +14,7 @@ public class CustomerCreatedEventHandler : IEventHandler<CustomerCreatedEvent>
 
     public Task HandleAsync(CustomerCreatedEvent @event)
     {
-        // Example: Log to console for now
         Console.WriteLine($"Customer Created: {@event.Name} ({@event.Email})");
-
-        // TODO: Could enqueue a welcome email, send to Azure Service Bus, etc.
         return Task.CompletedTask;
     }
 }

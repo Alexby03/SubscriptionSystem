@@ -1,10 +1,12 @@
 namespace SubscriptionSystem.Services;
 
 using SubscriptionSystem.Data;
-using SubscriptionSystem.Models;
+using SubscriptionSystem.Entities;
 using SubscriptionSystem.Results;
 using Microsoft.EntityFrameworkCore;
-using SubscriptionSystem.Enums;
+using SubscriptionSystem.Events;
+using SubscriptionSystem.Outbox;
+using System.Text.Json;
 
 public class SubscriptionService
 {
@@ -29,6 +31,13 @@ public class SubscriptionService
                 subscription.SubscriptionId
             );
             _db.Invoices.Add(invoice);
+            var @event = new SubscriptionCreatedEvent(customerId, planId);
+            var outboxEvent = new OutboxEvent()
+            {
+                EventType = nameof(SubscriptionCreatedEvent),
+                Payload = JsonSerializer.Serialize(@event)
+            };
+            _db.OutboxEvents.Add(outboxEvent);
             await _db.SaveChangesAsync();
             await transaction.CommitAsync();
             Console.WriteLine($"Invoice generated for CustomerId={customerId}, Amount={invoice.Amount:C}, DueDate={invoice.DueDate}");

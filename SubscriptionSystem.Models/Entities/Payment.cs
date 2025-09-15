@@ -1,4 +1,4 @@
-namespace SubscriptionSystem.Models;
+namespace SubscriptionSystem.Entities;
 
 using SubscriptionSystem.Enums;
 using SubscriptionSystem.Results;

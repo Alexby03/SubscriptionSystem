@@ -1,4 +1,4 @@
-using SubscriptionSystem.Models;
+using SubscriptionSystem.Entities;
 using SubscriptionSystem.Data;
 using Microsoft.EntityFrameworkCore;
 

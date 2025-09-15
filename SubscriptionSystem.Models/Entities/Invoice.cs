@@ -1,7 +1,7 @@
 using SubscriptionSystem.Enums;
 using SubscriptionSystem.Results;
 
-namespace SubscriptionSystem.Models;
+namespace SubscriptionSystem.Entities;
 
 public class Invoice
 {

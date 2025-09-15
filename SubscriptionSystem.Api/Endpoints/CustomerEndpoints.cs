@@ -1,4 +1,4 @@
-using SubscriptionSystem.Models;
+using SubscriptionSystem.Entities;
 using SubscriptionSystem.Dtos;
 using SubscriptionSystem.Results;
 using Microsoft.EntityFrameworkCore;
@@ -47,7 +47,7 @@ public static class CustomerEndpoints
         });
 
         //mark customer inactive
-        app.MapDelete("/customers/{id}", async (Guid id, CustomerService service) =>
+        app.MapPut("/customers/{id}/markInactive", async (Guid id, CustomerService service) =>
         {
             var customer = await service.MarkCustomerInactiveAsync(id);
             if (customer == null)

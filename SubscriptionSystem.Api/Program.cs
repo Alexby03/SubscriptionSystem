@@ -2,6 +2,7 @@ using SubscriptionSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using SubscriptionSystem.Services;
 using SubscriptionSystem.Events;
+using SubscriptionSystem.Workers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,9 +19,12 @@ builder.Services.AddScoped<SubscriptionService>();
 builder.Services.AddScoped<InvoiceService>();
 builder.Services.AddScoped<PaymentService>();
 
-//registered services for event handling
+//registered services for event handling and outbox processing
 builder.Services.AddScoped<IEventDispatcher, EventDispatcher>();
 builder.Services.AddScoped<IEventHandler<CustomerCreatedEvent>, CustomerCreatedEventHandler>();
+builder.Services.AddScoped<IEventHandler<SubscriptionCreatedEvent>, SubscriptionCreatedEventHandler>();
+builder.Services.AddHostedService<OutboxWorker>();
+
 
 var app = builder.Build();
 

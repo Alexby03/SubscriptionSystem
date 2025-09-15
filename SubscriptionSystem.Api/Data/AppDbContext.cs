@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using SubscriptionSystem.Models;
+using SubscriptionSystem.Entities;
+using SubscriptionSystem.Outbox;
 
 namespace SubscriptionSystem.Data;
 
@@ -10,6 +11,8 @@ public class AppDbContext : DbContext
     public DbSet<Payment> Payments { get; set; }
     public DbSet<Subscription> Subscriptions { get; set; }
     public DbSet<Plan> Plans { get; set; }
+    public DbSet<OutboxEvent> OutboxEvents { get; set; }
+
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options) { }
@@ -45,7 +48,6 @@ public class AppDbContext : DbContext
             .WithMany()
             .HasForeignKey(i => i.SubscriptionId)
             .OnDelete(DeleteBehavior.Cascade);
-
 
         //PAYMENT
         modelBuilder.Entity<Payment>()

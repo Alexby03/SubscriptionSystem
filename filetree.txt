@@ -1,0 +1,309 @@
+Folder PATH listing
+Volume serial number is 2695-BE89
+C:.
+³   filetree.txt
+³   SubscriptionSystem.sln
+³   todo.txt
+³   UML for endpoint requests.txt
+³   UML for model classes.txt
+³   
+ÃÄÄÄSubscriptionSystem.Api
+³   ³   appsettings.Development.json
+³   ³   appsettings.json
+³   ³   Program.cs
+³   ³   SubscriptionSystem.Api.csproj
+³   ³   SubscriptionSystem.Api.http
+³   ³   
+³   ÃÄÄÄbin
+³   ³   ÀÄÄÄDebug
+³   ³       ÀÄÄÄnet9.0
+³   ³           ³   appsettings.Development.json
+³   ³           ³   appsettings.json
+³   ³           ³   Humanizer.dll
+³   ³           ³   Microsoft.AspNetCore.OpenApi.dll
+³   ³           ³   Microsoft.Bcl.AsyncInterfaces.dll
+³   ³           ³   Microsoft.Build.Locator.dll
+³   ³           ³   Microsoft.CodeAnalysis.CSharp.dll
+³   ³           ³   Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+³   ³           ³   Microsoft.CodeAnalysis.dll
+³   ³           ³   Microsoft.CodeAnalysis.Workspaces.dll
+³   ³           ³   Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+³   ³           ³   Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+³   ³           ³   Microsoft.EntityFrameworkCore.Abstractions.dll
+³   ³           ³   Microsoft.EntityFrameworkCore.Design.dll
+³   ³           ³   Microsoft.EntityFrameworkCore.dll
+³   ³           ³   Microsoft.EntityFrameworkCore.Relational.dll
+³   ³           ³   Microsoft.Extensions.Caching.Abstractions.dll
+³   ³           ³   Microsoft.Extensions.Caching.Memory.dll
+³   ³           ³   Microsoft.Extensions.Configuration.Abstractions.dll
+³   ³           ³   Microsoft.Extensions.DependencyInjection.Abstractions.dll
+³   ³           ³   Microsoft.Extensions.DependencyInjection.dll
+³   ³           ³   Microsoft.Extensions.DependencyModel.dll
+³   ³           ³   Microsoft.Extensions.Logging.Abstractions.dll
+³   ³           ³   Microsoft.Extensions.Logging.dll
+³   ³           ³   Microsoft.Extensions.Options.dll
+³   ³           ³   Microsoft.Extensions.Primitives.dll
+³   ³           ³   Microsoft.OpenApi.dll
+³   ³           ³   Mono.TextTemplating.dll
+³   ³           ³   MySqlConnector.dll
+³   ³           ³   Pomelo.EntityFrameworkCore.MySql.dll
+³   ³           ³   SubscriptionSystem.Api.deps.json
+³   ³           ³   SubscriptionSystem.Api.dll
+³   ³           ³   SubscriptionSystem.Api.exe
+³   ³           ³   SubscriptionSystem.Api.pdb
+³   ³           ³   SubscriptionSystem.Api.runtimeconfig.json
+³   ³           ³   SubscriptionSystem.Api.staticwebassets.endpoints.json
+³   ³           ³   SubscriptionSystem.Models.dll
+³   ³           ³   SubscriptionSystem.Models.pdb
+³   ³           ³   System.CodeDom.dll
+³   ³           ³   System.Composition.AttributedModel.dll
+³   ³           ³   System.Composition.Convention.dll
+³   ³           ³   System.Composition.Hosting.dll
+³   ³           ³   System.Composition.Runtime.dll
+³   ³           ³   System.Composition.TypedParts.dll
+³   ³           ³   System.Text.Json.dll
+³   ³           ³   
+³   ³           ÃÄÄÄcs
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÃÄÄÄde
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÃÄÄÄes
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÃÄÄÄfr
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÃÄÄÄit
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÃÄÄÄja
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÃÄÄÄko
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÃÄÄÄpl
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÃÄÄÄpt-BR
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÃÄÄÄru
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÃÄÄÄtr
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÃÄÄÄzh-Hans
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³           ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³           ³       
+³   ³           ÀÄÄÄzh-Hant
+³   ³                   Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³                   Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³                   Microsoft.CodeAnalysis.resources.dll
+³   ³                   Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+³   ³                   Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³                   
+³   ÃÄÄÄData
+³   ³       AppDbContext.cs
+³   ³       
+³   ÃÄÄÄDtos
+³   ³       AddPaymentMethodDto.cs
+³   ³       CreateCustomerDto.cs
+³   ³       CreateSubscriptionDto.cs
+³   ³       ReturnCustomerDto.cs
+³   ³       ReturnSubscriptionDto.cs
+³   ³       
+³   ÃÄÄÄEndpoints
+³   ³       CustomerEndpoints.cs
+³   ³       InvoiceEndpoints.cs
+³   ³       PaymentEndpoints.cs
+³   ³       PlanEndpoints.cs
+³   ³       SubscriptionEndpoint.cs
+³   ³       
+³   ÃÄÄÄEvents
+³   ³   ³   EventDispatcher.cs
+³   ³   ³   IEvent.cs
+³   ³   ³   IEventHandler.cs
+³   ³   ³   
+³   ³   ÃÄÄÄCustomer
+³   ³   ³       CustomerCreatedEvent.cs
+³   ³   ³       CustomerCreatedEventHandler.cs
+³   ³   ³       
+³   ³   ÃÄÄÄInvoice
+³   ³   ÀÄÄÄSubscription
+³   ³           SubscriptionCreatedEvent.cs
+³   ³           SubscriptionCreatedEventHandler.cs
+³   ³           
+³   ÃÄÄÄobj
+³   ³   ³   project.assets.json
+³   ³   ³   project.nuget.cache
+³   ³   ³   SubscriptionSystem.Api.csproj.nuget.dgspec.json
+³   ³   ³   SubscriptionSystem.Api.csproj.nuget.g.props
+³   ³   ³   SubscriptionSystem.Api.csproj.nuget.g.targets
+³   ³   ³   
+³   ³   ÀÄÄÄDebug
+³   ³       ÀÄÄÄnet9.0
+³   ³           ³   .NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+³   ³           ³   apphost.exe
+³   ³           ³   rjsmcshtml.dswa.cache.json
+³   ³           ³   rjsmrazor.dswa.cache.json
+³   ³           ³   rpswa.dswa.cache.json
+³   ³           ³   staticwebassets.build.endpoints.json
+³   ³           ³   staticwebassets.build.json
+³   ³           ³   staticwebassets.build.json.cache
+³   ³           ³   Subscrip.9006F14D.Up2Date
+³   ³           ³   SubscriptionSystem.Api.AssemblyInfo.cs
+³   ³           ³   SubscriptionSystem.Api.AssemblyInfoInputs.cache
+³   ³           ³   SubscriptionSystem.Api.assets.cache
+³   ³           ³   SubscriptionSystem.Api.csproj.AssemblyReference.cache
+³   ³           ³   SubscriptionSystem.Api.csproj.CoreCompileInputs.cache
+³   ³           ³   SubscriptionSystem.Api.csproj.FileListAbsolute.txt
+³   ³           ³   SubscriptionSystem.Api.dll
+³   ³           ³   SubscriptionSystem.Api.GeneratedMSBuildEditorConfig.editorconfig
+³   ³           ³   SubscriptionSystem.Api.genruntimeconfig.cache
+³   ³           ³   SubscriptionSystem.Api.GlobalUsings.g.cs
+³   ³           ³   SubscriptionSystem.Api.MvcApplicationPartsAssemblyInfo.cache
+³   ³           ³   SubscriptionSystem.Api.MvcApplicationPartsAssemblyInfo.cs
+³   ³           ³   SubscriptionSystem.Api.pdb
+³   ³           ³   SubscriptionSystem.Api.sourcelink.json
+³   ³           ³   
+³   ³           ÃÄÄÄref
+³   ³           ³       SubscriptionSystem.Api.dll
+³   ³           ³       
+³   ³           ÃÄÄÄrefint
+³   ³           ³       SubscriptionSystem.Api.dll
+³   ³           ³       
+³   ³           ÀÄÄÄstaticwebassets
+³   ÃÄÄÄOutbox
+³   ³       OutboxEvent.cs
+³   ³       OutboxWorker.cs
+³   ³       
+³   ÃÄÄÄProperties
+³   ³       launchSettings.json
+³   ³       
+³   ÀÄÄÄServices
+³           CustomerService.cs
+³           InvoiceService.cs
+³           PaymentService.cs
+³           SubscriptionService.cs
+³           
+ÀÄÄÄSubscriptionSystem.Models
+    ³   SubscriptionSystem.Models.csproj
+    ³   
+    ÃÄÄÄbin
+    ³   ÀÄÄÄDebug
+    ³       ÀÄÄÄnet9.0
+    ³               SubscriptionSystem.Models.deps.json
+    ³               SubscriptionSystem.Models.dll
+    ³               SubscriptionSystem.Models.pdb
+    ³               
+    ÃÄÄÄEnums
+    ³       BillingCycle.cs
+    ³       CustomerStatus.cs
+    ³       InvoiceStatus.cs
+    ³       PaymentStatus.cs
+    ³       SubscriptionStatus.cs
+    ³       
+    ÃÄÄÄModels
+    ³       Customer.cs
+    ³       Invoice.cs
+    ³       Payment.cs
+    ³       Plan.cs
+    ³       Plans.cs
+    ³       Subscription.cs
+    ³       
+    ÃÄÄÄobj
+    ³   ³   project.assets.json
+    ³   ³   project.nuget.cache
+    ³   ³   SubscriptionSystem.csproj.nuget.dgspec.json
+    ³   ³   SubscriptionSystem.csproj.nuget.g.props
+    ³   ³   SubscriptionSystem.csproj.nuget.g.targets
+    ³   ³   SubscriptionSystem.Models.csproj.nuget.dgspec.json
+    ³   ³   SubscriptionSystem.Models.csproj.nuget.g.props
+    ³   ³   SubscriptionSystem.Models.csproj.nuget.g.targets
+    ³   ³   
+    ³   ÀÄÄÄDebug
+    ³       ÀÄÄÄnet9.0
+    ³           ³   .NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+    ³           ³   SubscriptionSystem.AssemblyInfo.cs
+    ³           ³   SubscriptionSystem.AssemblyInfoInputs.cache
+    ³           ³   SubscriptionSystem.assets.cache
+    ³           ³   SubscriptionSystem.GeneratedMSBuildEditorConfig.editorconfig
+    ³           ³   SubscriptionSystem.GlobalUsings.g.cs
+    ³           ³   SubscriptionSystem.Models.AssemblyInfo.cs
+    ³           ³   SubscriptionSystem.Models.AssemblyInfoInputs.cache
+    ³           ³   SubscriptionSystem.Models.assets.cache
+    ³           ³   SubscriptionSystem.Models.csproj.CoreCompileInputs.cache
+    ³           ³   SubscriptionSystem.Models.csproj.FileListAbsolute.txt
+    ³           ³   SubscriptionSystem.Models.dll
+    ³           ³   SubscriptionSystem.Models.GeneratedMSBuildEditorConfig.editorconfig
+    ³           ³   SubscriptionSystem.Models.GlobalUsings.g.cs
+    ³           ³   SubscriptionSystem.Models.pdb
+    ³           ³   SubscriptionSystem.Models.sourcelink.json
+    ³           ³   
+    ³           ÃÄÄÄref
+    ³           ³       SubscriptionSystem.Models.dll
+    ³           ³       
+    ³           ÀÄÄÄrefint
+    ³                   SubscriptionSystem.Models.dll
+    ³                   
+    ÀÄÄÄResults
+            GenericResult.cs
+            PayInvoiceResult.cs
+            ProcessPaymentResult.cs
+            RenewSubscriptionResult.cs
+            SubscribeResult.cs
+            UnsubscribeResult.cs
+            UpgradeResult.cs
+            

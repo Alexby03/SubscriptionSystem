@@ -1,11 +1,13 @@
 namespace SubscriptionSystem.Services;
 
 using SubscriptionSystem.Data;
-using SubscriptionSystem.Models;
+using SubscriptionSystem.Entities;
 using SubscriptionSystem.Results;
 using Microsoft.EntityFrameworkCore;
 using SubscriptionSystem.Dtos;
 using SubscriptionSystem.Events;
+using SubscriptionSystem.Outbox;
+using System.Text.Json;
 
 public class CustomerService
 {
@@ -34,10 +36,15 @@ public class CustomerService
         try
         {
             _db.Customers.Add(customer);
-            await _db.SaveChangesAsync();
 
             var @event = new CustomerCreatedEvent(customer.CustomerId, customer.Name, customer.Email);
-            await _dispatcher.PublishAsync(@event);
+            var outboxEvent = new OutboxEvent()
+            {
+                EventType = nameof(CustomerCreatedEvent),
+                Payload = JsonSerializer.Serialize(@event)
+            };
+            _db.OutboxEvents.Add(outboxEvent);
+            await _db.SaveChangesAsync();
         }
         catch (DbUpdateException ex) when (ex.InnerException?.Message.Contains("Duplicate entry") == true)
         {
