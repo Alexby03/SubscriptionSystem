@@ -14,7 +14,7 @@ public class SubscriptionCreatedEventHandler : IEventHandler<SubscriptionCreated
 
     public Task HandleAsync(SubscriptionCreatedEvent @event)
     {
-        Console.WriteLine($"Subscription Created: {@event.PlanId} ({@event.CustomerId})");
+        Console.WriteLine($"EVENT HANDLED: Subscription Created: {@event.PlanId} ({@event.CustomerId})");
         return Task.CompletedTask;
     }
 }

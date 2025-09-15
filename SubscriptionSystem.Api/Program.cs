@@ -2,7 +2,8 @@ using SubscriptionSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using SubscriptionSystem.Services;
 using SubscriptionSystem.Events;
-using SubscriptionSystem.Workers;
+using SubscriptionSystem.Outbox;
+using Azure.Messaging.ServiceBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +20,44 @@ builder.Services.AddScoped<SubscriptionService>();
 builder.Services.AddScoped<InvoiceService>();
 builder.Services.AddScoped<PaymentService>();
 
-//registered services for event handling and outbox processing
-builder.Services.AddScoped<IEventDispatcher, EventDispatcher>();
+//Dispatcher to azure bus
+builder.Services.AddSingleton<IEventDispatcher>(sp =>
+    new AzureServiceBusDispatcher(
+        builder.Configuration.GetConnectionString("AzureServiceBus")!,
+        builder.Configuration["ServiceBus:TopicName"]!
+    )
+);
+
+
+//outbox handler
+builder.Services.AddHostedService<OutboxWorker>(); 
+
+//connection to azure bus
+builder.Services.AddSingleton(sp => 
+    new ServiceBusClient(builder.Configuration.GetConnectionString("AzureServiceBus")!));
+
+//azure bus subscription created handler
+builder.Services.AddHostedService(sp => 
+    new AzureServiceBusWorker(
+        sp,
+        sp.GetRequiredService<ILogger<AzureServiceBusWorker>>(),
+        sp.GetRequiredService<ServiceBusClient>(),
+        builder.Configuration["ServiceBus:TopicName"]!,
+        "all-events-sub"
+    )
+);
+
+//azure bus customer created handler
+builder.Services.AddHostedService(sp =>
+    new AzureServiceBusWorker(
+        sp,
+        sp.GetRequiredService<ILogger<AzureServiceBusWorker>>(),
+        sp.GetRequiredService<ServiceBusClient>(),
+        builder.Configuration["ServiceBus:TopicName"]!,
+        "all-events-sub"
+    )
+);
+
 builder.Services.AddScoped<IEventHandler<CustomerCreatedEvent>, CustomerCreatedEventHandler>();
 builder.Services.AddScoped<IEventHandler<SubscriptionCreatedEvent>, SubscriptionCreatedEventHandler>();
 builder.Services.AddHostedService<OutboxWorker>();

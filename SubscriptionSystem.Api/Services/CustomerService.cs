@@ -32,9 +32,9 @@ public class CustomerService
 
     public async Task<GenericResult> CreateCustomerAsync(CreateCustomerDto dto)
     {
-        var customer = new Customer(dto.Name, dto.Email, dto.BillingAddress);
         try
         {
+            var customer = new Customer(dto.Name, dto.Email, dto.BillingAddress);
             _db.Customers.Add(customer);
 
             var @event = new CustomerCreatedEvent(customer.CustomerId, customer.Name, customer.Email);

@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using SubscriptionSystem.Data;
 using SubscriptionSystem.Events;
+using SubscriptionSystem.Services;
 using System.Text.Json;
 
-namespace SubscriptionSystem.Workers;
+namespace SubscriptionSystem.Outbox;
 
 public class OutboxWorker : BackgroundService
 {
@@ -31,30 +32,20 @@ public class OutboxWorker : BackgroundService
                 var events = await db.OutboxEvents
                     .Where(e => !e.Processed)
                     .OrderBy(e => e.CreatedAt)
-                    .Take(20) // batch size
+                    .Take(20)
                     .ToListAsync(stoppingToken);
 
                 foreach (var outbox in events)
                 {
                     var type = Type.GetType($"SubscriptionSystem.Events.{outbox.EventType}");
                     if (type == null) continue;
-
                     var @event = JsonSerializer.Deserialize(outbox.Payload, type);
                     if (@event == null) continue;
 
-                    var method = typeof(IEventDispatcher).GetMethod("PublishAsync")?.MakeGenericMethod(type);
-
-                    if (method != null)
-                    {
-                        var task = (Task)method.Invoke(dispatcher, new[] { @event })!;
-                        if (task != null)
-                        {
-                            await task;
-                            outbox.Processed = true;
-                        }
-                    }
+                    await dispatcher.PublishAsync((dynamic)@event);
+                    outbox.Processed = true;
+                    _logger.LogInformation("Outbox Event processed: {EventId} ({EventType})", outbox.Id, outbox.EventType);
                 }
-
                 await db.SaveChangesAsync(stoppingToken);
             }
             catch (Exception ex)
@@ -62,7 +53,7 @@ public class OutboxWorker : BackgroundService
                 _logger.LogError(ex, "Error processing outbox events");
             }
 
-            await Task.Delay(TimeSpan.FromSeconds(300), stoppingToken); // waittime next scan
+            await Task.Delay(TimeSpan.FromSeconds(15), stoppingToken);
         }
 
         _logger.LogInformation("Outbox worker stopped.");

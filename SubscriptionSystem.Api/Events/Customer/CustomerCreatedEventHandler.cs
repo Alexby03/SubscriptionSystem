@@ -14,7 +14,7 @@ public class CustomerCreatedEventHandler : IEventHandler<CustomerCreatedEvent>
 
     public Task HandleAsync(CustomerCreatedEvent @event)
     {
-        Console.WriteLine($"Customer Created: {@event.Name} ({@event.Email})");
+        Console.WriteLine($"EVENT HANDLED: Customer Created: {@event.Name} ({@event.Email})");
         return Task.CompletedTask;
     }
 }
