@@ -10,3 +10,15 @@ C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\n
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\refint\SubscriptionSystem.Models.dll
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\SubscriptionSystem.Models.pdb
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\ref\SubscriptionSystem.Models.dll
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\bin\Debug\net9.0\SubscriptionSystem.Models.deps.json
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\bin\Debug\net9.0\SubscriptionSystem.Models.dll
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\bin\Debug\net9.0\SubscriptionSystem.Models.pdb
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\SubscriptionSystem.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\SubscriptionSystem.Models.AssemblyInfoInputs.cache
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\SubscriptionSystem.Models.AssemblyInfo.cs
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\SubscriptionSystem.Models.csproj.CoreCompileInputs.cache
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\SubscriptionSystem.Models.sourcelink.json
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\SubscriptionSystem.Models.dll
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\refint\SubscriptionSystem.Models.dll
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\SubscriptionSystem.Models.pdb
+C:\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Models\obj\Debug\net9.0\ref\SubscriptionSystem.Models.dll

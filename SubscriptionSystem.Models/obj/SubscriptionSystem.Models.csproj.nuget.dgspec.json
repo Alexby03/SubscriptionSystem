@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\SubscriptionSystem.Models.csproj": {}
+    "C:\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\SubscriptionSystem.Models.csproj": {}
   },
   "projects": {
-    "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\SubscriptionSystem.Models.csproj": {
+    "C:\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\SubscriptionSystem.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\SubscriptionSystem.Models.csproj",
+        "projectUniqueName": "C:\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\SubscriptionSystem.Models.csproj",
         "projectName": "SubscriptionSystem.Models",
-        "projectPath": "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\SubscriptionSystem.Models.csproj",
-        "packagesPath": "C:\\Users\\BOTALEX\\.nuget\\packages\\",
-        "outputPath": "C:\\VSCProgram\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\obj\\",
+        "projectPath": "C:\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\SubscriptionSystem.Models.csproj",
+        "packagesPath": "C:\\Users\\snipe\\.nuget\\packages\\",
+        "outputPath": "C:\\Azure\\SMS\\SubscriptionSystem\\SubscriptionSystem.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\BOTALEX\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\snipe\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

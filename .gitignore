@@ -1,0 +1,31 @@
+# Build folders
+bin/
+obj/
+
+# VS Code settings
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+
+# Publish output
+publish/
+*.zip
+
+# Logs
+*.log
+
+# Environment-specific config
+appsettings.Development.json
+appsettings.Local.json
+
+# Azure artifacts
+*.PublishSettings
+*.pubxml
+*.pubxml.user
+
+# Other generated files
+*.dbmdl
+*.bak
+*.cache
