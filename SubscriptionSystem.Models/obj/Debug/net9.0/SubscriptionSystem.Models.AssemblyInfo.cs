@@ -13,7 +13,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SubscriptionSystem.Models")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c47e74152ccf0318a7e68efbbe6b680c8d0c72b")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00a1be1c55805477c455c0365a686bd1853b51ae")]
+>>>>>>> 0817f30e54bf74e2fc41d86bdafd721a068df0ed
 [assembly: System.Reflection.AssemblyProductAttribute("SubscriptionSystem.Models")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SubscriptionSystem.Models")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

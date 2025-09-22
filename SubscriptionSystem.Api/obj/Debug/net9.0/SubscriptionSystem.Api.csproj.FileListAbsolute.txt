@@ -136,4 +136,7 @@ C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\Microsoft.Azure.Amqp.dll
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\System.ClientModel.dll
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\System.Memory.Data.dll
+<<<<<<< HEAD
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\appsettings.json
+=======
+>>>>>>> 0817f30e54bf74e2fc41d86bdafd721a068df0ed
