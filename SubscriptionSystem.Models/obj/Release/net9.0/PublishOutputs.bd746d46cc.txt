@@ -1,3 +1,0 @@
-C:\VSCProgram\Azure\SMS\SubscriptionSystem\publish\SubscriptionSystem.Models.dll
-C:\VSCProgram\Azure\SMS\SubscriptionSystem\publish\SubscriptionSystem.Models.deps.json
-C:\VSCProgram\Azure\SMS\SubscriptionSystem\publish\SubscriptionSystem.Models.pdb
