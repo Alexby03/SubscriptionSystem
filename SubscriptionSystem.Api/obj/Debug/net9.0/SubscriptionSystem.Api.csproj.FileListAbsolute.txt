@@ -1,5 +1,4 @@
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\appsettings.Development.json
-C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\appsettings.json
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\SubscriptionSystem.Api.staticwebassets.endpoints.json
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\SubscriptionSystem.Api.exe
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\SubscriptionSystem.Api.deps.json
@@ -137,9 +136,4 @@ C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\Microsoft.Azure.Amqp.dll
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\System.ClientModel.dll
 C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\System.Memory.Data.dll
-C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\publish\web.config
-C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\publish\appsettings.Development.json
-C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\publish\appsettings.json
-C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\publish\SubscriptionSystem.Api.deps.json
-C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\publish\SubscriptionSystem.Api.runtimeconfig.json
-C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\publish\SubscriptionSystem.Api.staticwebassets.endpoints.json
+C:\VSCProgram\Azure\SMS\SubscriptionSystem\SubscriptionSystem.Api\bin\Debug\net9.0\appsettings.json
