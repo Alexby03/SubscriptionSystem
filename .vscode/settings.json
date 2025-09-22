@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/4ef7c437-aa84-4672-98d8-1d254a9cd608/resourceGroups/subscription-management-system_group/providers/Microsoft.Web/sites/subscription-management-system",
+    "appService.deploySubpath": "SubscriptionSystem.Api/publish.zip"
+}

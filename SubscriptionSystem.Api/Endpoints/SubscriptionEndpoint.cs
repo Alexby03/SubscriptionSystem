@@ -1,4 +1,4 @@
-using SubscriptionSystem.Models;
+using SubscriptionSystem.Entities;
 using SubscriptionSystem.Dtos;
 using SubscriptionSystem.Results;
 using SubscriptionSystem.Services;
