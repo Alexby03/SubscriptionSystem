@@ -34,20 +34,6 @@ public class AzureServiceBusWorker : BackgroundService
             var json = args.Message.Body.ToString();
             var typeName = args.Message.Subject;
             var type = Type.GetType($"SubscriptionSystem.Events.{args.Message.Subject}");
-<<<<<<< HEAD
-=======
-            _logger.LogInformation("Resolving event type: {TypeName}", $"SubscriptionSystem.Events.{typeName}");
-
-            if (type == null)
-            {
-                _logger.LogWarning("Type.GetType failed for event {TypeName}", typeName);
-            }
-            else
-            {
-                _logger.LogInformation("Resolved type: {ResolvedType}", type.AssemblyQualifiedName);
-            }
-
->>>>>>> 0817f30e54bf74e2fc41d86bdafd721a068df0ed
 
             if (type != null)
             {
@@ -57,18 +43,11 @@ public class AzureServiceBusWorker : BackgroundService
                 {
                     using var scope = _serviceProvider.CreateScope();
                     var handlers = scope.ServiceProvider.GetServices(typeof(IEventHandler<>).MakeGenericType(type));
-<<<<<<< HEAD
-                    if(handlers.Any()) _logger.LogInformation("Azure Serice Bus handling: {EventType}", typeName);
-=======
->>>>>>> 0817f30e54bf74e2fc41d86bdafd721a068df0ed
+                    if(handlers.Any()) _logger.LogInformation("Azure Service Bus: Handling: {EventType}", typeName);
                     foreach (dynamic handler in handlers!)
                     {
                         await handler.HandleAsync((dynamic)evt);
                     }
-<<<<<<< HEAD
-=======
-                    _logger.LogInformation("Handled event: {EventType}", typeName);
->>>>>>> 0817f30e54bf74e2fc41d86bdafd721a068df0ed
                 }
             }
 
