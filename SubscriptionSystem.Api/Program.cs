@@ -32,7 +32,10 @@ builder.Services.AddSingleton<IEventDispatcher>(sp =>
 
 
 //outbox handler
-builder.Services.AddHostedService<OutboxWorker>(); 
+builder.Services.AddHostedService<OutboxWorker>();
+
+//unpaid invoices reminder handler
+builder.Services.AddHostedService<InvoiceReminderService>(); 
 
 //connection to azure bus
 builder.Services.AddSingleton(sp => 
@@ -60,8 +63,12 @@ builder.Services.AddHostedService(sp =>
     )
 );
 
+//event handlers, loaded by the event dispatcher
 builder.Services.AddScoped<IEventHandler<CustomerCreatedEvent>, CustomerCreatedEventHandler>();
+builder.Services.AddScoped<IEventHandler<InvoiceCreatedEvent>, InvoiceCreatedEventHandler>();
 builder.Services.AddScoped<IEventHandler<SubscriptionCreatedEvent>, SubscriptionCreatedEventHandler>();
+builder.Services.AddScoped<IEventHandler<SubscriptionBillingAdvancedEvent>, SubscriptionBillingAdvancedEventHandler>();
+builder.Services.AddScoped<IEventHandler<SubscriptionUpgradedEvent>, SubscriptionUpgradedEventHandler>();
 builder.Services.AddHostedService<OutboxWorker>();
 
 

@@ -44,10 +44,10 @@ public class AppDbContext : DbContext
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Invoice>()
-            .HasOne<Subscription>()
-            .WithMany()
-            .HasForeignKey(i => i.SubscriptionId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasOne(i => i.Subscription)      
+            .WithMany()                       
+            .HasForeignKey(i => i.SubscriptionId) 
+            .OnDelete(DeleteBehavior.SetNull);   
 
         //PAYMENT
         modelBuilder.Entity<Payment>()

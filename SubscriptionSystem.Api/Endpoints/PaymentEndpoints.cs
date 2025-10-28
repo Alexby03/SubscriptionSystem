@@ -33,16 +33,17 @@ public static class PaymentEndpoints
         });
 
         //refund payment
-        app.MapPost("/payments/{paymentId}/refund", async (Guid paymentId, [FromServices] PaymentService service) =>
+        app.MapPost("/payments/{paymentId}/refund", (Guid paymentId, [FromServices] PaymentService service) =>
         {
-            var result = await service.RefundPaymentAsync(paymentId);
+            /*var result = await service.RefundPaymentAsync(paymentId);
             return result switch
             {
                 ProcessPaymentResult.Refunded => Results.Ok("Payment already refunded."),
                 ProcessPaymentResult.NotFound => Results.NotFound("Payment not found."),
                 ProcessPaymentResult.Success => Results.Ok("Payment refunded successfully."),
                 _ => Results.BadRequest("Refund failed.")
-            };
+            };*/
+            Console.WriteLine("TODO: Add refund logic");
         });
 
         //list all payments for customer

@@ -17,7 +17,7 @@ public class SubscriptionCreatedEventHandler : IEventHandler<SubscriptionCreated
     public Task HandleAsync(SubscriptionCreatedEvent @event)
     {
         _logger.LogInformation(
-            "EVENT HANDLED: Subscription Created: {PlanId} ({CustomerId})",
+            "EVENT HANDLED: Subscription Created: {@event.PlanId} ({@event.CustomerId})",
             @event.PlanId,
             @event.CustomerId
         );

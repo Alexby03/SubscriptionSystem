@@ -44,7 +44,7 @@ public class PaymentService
         return ProcessPaymentResult.Declined;
     }
 
-    public async Task<ProcessPaymentResult> RefundPaymentAsync(Guid paymentId)
+    /*public async Task<ProcessPaymentResult> RefundPaymentAsync(Guid paymentId)
     {
         var payment = await _db.Payments.FirstOrDefaultAsync(p => p.PaymentId == paymentId);
         if (payment == null)
@@ -60,7 +60,7 @@ public class PaymentService
             return ProcessPaymentResult.Success;
         }
         return ProcessPaymentResult.Failed;
-    }
+    }*/
 
     public async Task<List<Payment>> GetPaymentsForCustomerAsync(Guid customerId)
     {

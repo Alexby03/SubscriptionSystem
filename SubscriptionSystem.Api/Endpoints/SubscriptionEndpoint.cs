@@ -29,7 +29,7 @@ public static class SubscriptionEndpoint
             var newSubscription = await service.CreateSubscriptionAsync(
                 customer.CustomerId,
                 dto.PlanId,
-                DateTime.UtcNow.AddDays(30)
+                dto.BillingCycle
             );
             return Results.Created($"/customers/{id}/subscriptions/{newSubscription.SubscriptionId}", newSubscription);
         });
@@ -53,7 +53,7 @@ public static class SubscriptionEndpoint
             var subscription = await db.Subscriptions.FirstOrDefaultAsync(s => s.SubscriptionId == subscriptionId && s.CustomerId == customerId);
             if (subscription == null)
                 return Results.NotFound($"Subscription with id {subscriptionId} for customer {customerId} was not found.");
-            var renewResult = service.RenewSubscriptionAsync(subscriptionId).Result;
+            var renewResult = service.AdvanceSubscriptionBillingAsync(subscriptionId).Result;
             if (renewResult == RenewSubscriptionResult.Failed)
                 return Results.BadRequest($"Subscription with id {subscriptionId} could not be renewed.");
             if (renewResult == RenewSubscriptionResult.Trial)
@@ -62,6 +62,20 @@ public static class SubscriptionEndpoint
                 return Results.BadRequest($"Subscription with id {subscriptionId} is canceled and cannot be renewed.");
             await db.SaveChangesAsync();
             return Results.Ok($"Subscription with id {subscriptionId} renewed successfully until {subscription.EndDate}.");
+        });
+
+        //upgrade a subscription for a customer
+        app.MapPut("/customers/{customerId}/subscriptions/{subscriptionId}/upgrade", async (Guid customerId, Guid subscriptionId, UpgradeSubscriptionDto dto, AppDbContext db, [FromServices] SubscriptionService service) =>
+        {
+            var subscription = await db.Subscriptions.FirstOrDefaultAsync(s => s.SubscriptionId == subscriptionId && s.CustomerId == customerId);
+            if (subscription == null)
+                return Results.NotFound($"Subscription with id {subscriptionId} for customer {customerId} was not found.");
+            var upgradeResult = service.UpgradePlanAsync(subscriptionId, dto.NewPlanId).Result;
+            Console.WriteLine(dto.NewPlanId);
+            if (upgradeResult == GenericResult.Failed)
+                return Results.BadRequest($"Subscription with id {subscriptionId} could not be upgraded.");
+            await db.SaveChangesAsync();
+            return Results.Ok($"Subscription with id {subscriptionId} upgraded successfully to plan {subscription.PlanId}.");
         });
     }
 }
