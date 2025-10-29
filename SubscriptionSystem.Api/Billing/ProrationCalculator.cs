@@ -10,18 +10,17 @@ public static class ProrationCalculator
         DateTime changeDate)
     {
         var totalSeconds = (periodEnd - periodStart).TotalSeconds;
-        var remainingSeconds = (periodEnd - changeDate).TotalSeconds;
+        var elapsedSeconds = (changeDate - periodStart).TotalSeconds;
+        var remainingSeconds = totalSeconds - elapsedSeconds;
 
         if (totalSeconds <= 0 || remainingSeconds <= 0)
             return 0;
 
-        var fractionRemaining = remainingSeconds / totalSeconds;
+        var fractionRemaining = (decimal)remainingSeconds / (decimal)totalSeconds;
 
-        var oldPortion = oldPrice * (decimal)fractionRemaining;
-        var newPortion = newPrice * (decimal)fractionRemaining;
-
-        var difference = newPortion - oldPortion;
+        var difference = (newPrice - oldPrice) * fractionRemaining;
 
         return Math.Round(difference, 2);
+
     }
 }

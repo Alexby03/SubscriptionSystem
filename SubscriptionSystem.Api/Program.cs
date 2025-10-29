@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SubscriptionSystem.Services;
 using SubscriptionSystem.Events;
 using SubscriptionSystem.Outbox;
+using Microsoft.Extensions.Logging.AzureAppServices;
 using Azure.Messaging.ServiceBus;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,11 @@ builder.Services.AddSingleton<IEventDispatcher>(sp =>
     )
 );
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
+builder.Logging.AddConsole();
+builder.Logging.AddAzureWebAppDiagnostics();
+
 
 //outbox handler
 builder.Services.AddHostedService<OutboxWorker>();
@@ -43,17 +49,6 @@ builder.Services.AddSingleton(sp =>
 
 //azure bus subscription created handler
 builder.Services.AddHostedService(sp => 
-    new AzureServiceBusWorker(
-        sp,
-        sp.GetRequiredService<ILogger<AzureServiceBusWorker>>(),
-        sp.GetRequiredService<ServiceBusClient>(),
-        builder.Configuration["ServiceBus:TopicName"]!,
-        "all-events-sub"
-    )
-);
-
-//azure bus customer created handler
-builder.Services.AddHostedService(sp =>
     new AzureServiceBusWorker(
         sp,
         sp.GetRequiredService<ILogger<AzureServiceBusWorker>>(),
